@@ -26,6 +26,35 @@
     },
     "templateRepoSecurityToken": {
       "type": "securestring"
+    },
+    "timeZoneId": {
+      "type": "string",
+      "minLength": 3,
+      "metadata": {
+        "description": "The Windows time zone id associated with labVmShutDownTime (E.g. UTC, Pacific Standard Time, Central Europe Standard Time)."
+      }
+    },
+    "maxAllowedVmsPerUser": {
+      "type": "int",
+      "minValue": 0,
+      "metadata": {
+        "description": "The maximum number of VMs allowed per user."
+      }
+    },
+    "maxAllowedVmsPerLab": {
+      "type": "int",
+      "minValue": 0,
+      "metadata": {
+        "description": "The maximum number of VMs allowed per lab."
+      }
+    },
+    "labVmShutDownTime": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 5,
+      "metadata": {
+        "description": "The time (relative to timeZoneId) at which the Lab VMs will be automatically shutdown (E.g. 17:30, 20:00, 09:00)."
+      }
     }
   },
   "variables": {
@@ -46,6 +75,52 @@
           "dependsOn": [
             "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]"
           ]
+        },
+        {
+          "apiVersion": "2017-04-26-preview",
+          "name": "LabVmsShutdown",
+          "type": "schedules",
+          "dependsOn": [
+            "[resourceId('Microsoft.DevTestLab/labs',parameters('labName'))]"
+          ],
+          "properties": {
+            "status": "enabled",
+            "taskType": "LabVmsShutdownTask",
+            "timeZoneId": "[string(parameters('timeZoneId'))]",
+            "dailyRecurrence": {
+              "time": "[string(parameters('labVmShutDownTime'))]"
+            }
+          }
+        },
+        {
+          "apiVersion": "2017-04-26-preview",
+          "name": "default/MaxVmsAllowedPerUser",
+          "type": "policySets/policies",
+          "dependsOn": [
+            "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]"
+          ],
+          "properties": {
+            "description": "",
+            "factName": "UserOwnedLabVmCount",
+            "threshold": "[string(parameters('maxAllowedVmsPerUser'))]",
+            "evaluatorType": "MaxValuePolicy",
+            "status": "enabled"
+          }
+        },
+        {
+          "apiVersion": "2017-04-26-preview",
+          "name": "default/MaxVmsAllowedPerLab",
+          "type": "policySets/policies",
+          "dependsOn": [
+            "[resourceId('Microsoft.DevTestLab/labs', parameters('labName'))]"
+          ],
+          "properties": {
+            "description": "",
+            "factName": "LabVmCount",
+            "threshold": "[string(parameters('maxAllowedVmsPerLab'))]",
+            "evaluatorType": "MaxValuePolicy",
+            "status": "enabled"
+          }
         },
         {
           "apiVersion": "2017-04-26-preview",
