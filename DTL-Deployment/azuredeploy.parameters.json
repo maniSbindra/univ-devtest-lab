@@ -13,6 +13,18 @@
     },
     "templateRepoSecurityToken": {
       "value": "ReplaceWithYourGithubPAToken"
+    },
+    "maxAllowedVmsPerUser": {
+      "value": 10
+    },
+    "maxAllowedVmsPerLab": {
+      "value": 50
+    },
+    "labVmShutDownTime": {
+      "value": "17:30"
+    },
+    "timeZoneId": {
+      "value": "Pacific Standard Time"
     }
   }
 }
