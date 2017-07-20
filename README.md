@@ -2,6 +2,17 @@
    Sample solution to demonstrate how Azure Dev Test Lab can be provisioned by university staff, with precreated templates for each semister/ semister courses
 
 ## Overview
+
+### Overview Diagram
+![overview diagram](https://raw.githubusercontent.com/maniSbindra/univ-devtest-lab/master/images/solution-overview.png)
+
+### Context
+This sample is intented to demonstrate how Azure Dev Test Laps with template repositories could be used By Universities  to allow students to instantiate preconfigured course Lab VMs. One potential contextual flow could be
+* The University/College Admin would first provision the Dev Test Lab by following the steps mentioned below
+* The Admin would then add/invite students to use the dev test Lab, giving them devtestlab user permission
+* students would then use the dev test lab to create new VMs with preconfigured course lab content (based on templates from the template repository)
+
+### Key Points
 * The Templates folder should have semester wise templates provisioning the lab material for each course in that semester. Currently only a BE-Sem5 sample template has been added.
 * The DTL-Deployment folder has scripts which provisions a Dev Test Lab, Configured with The Template repository. That is once the Dev Test Lab is provisioned users will be able to create VMs containing their course where by selecting the appropriate template
 
