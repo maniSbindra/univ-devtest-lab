@@ -7,7 +7,7 @@
 ![overview diagram](https://raw.githubusercontent.com/maniSbindra/univ-devtest-lab/master/images/solution-overview.png)
 
 ### Context
-This sample is intented to demonstrate how Azure Dev Test Laps with template repositories could be used By Universities  to allow students to instantiate preconfigured course Lab VMs. One potential contextual flow could be
+This sample is intented to demonstrate how Azure Dev Test Labs with template repositories could be used By Universities  to allow students to instantiate preconfigured course Lab VMs. One potential contextual flow could be
 * The University/College Admin would first provision the Dev Test Lab by following the steps mentioned below
 * The Admin would then add/invite students to use the dev test Lab, giving them devtestlab user permission
 * students would then use the dev test lab to create new VMs with preconfigured course lab content (based on templates from the template repository)
